@@ -1,49 +1,49 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, Button, FlatList} from 'react-native';
-import styles from '../style/Style';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {Button} from '../components/Button';
 
 export function Home() {
-  const [min, setMin] = useState(null);
-  const [max, setMax] = useState(null);
-  const [numbers, setNumbers] = useState([]);
-
-  function handleGenerateNewRandomNumbers() {
-    if (min && max) {
-      const newArray = [];
-      for (let i = 0; i < 5; i++) {
-        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        newArray.push(randomNumber);
-      }
-      setNumbers(newArray);
-    }
+  function handleOnPress() {
+    console.warn('Im alive!');
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Valor mínimo:</Text>
-      <TextInput
-        style={styles.input}
-        value={min}
-        onChangeText={valor => setMin(parseInt(valor))}
-        keyboardType="numeric"
-      />
-      <Text style={styles.label}>Valor máximo:</Text>
-      <TextInput
-        style={styles.input}
-        value={max}
-        onChangeText={valor => setMax(parseInt(valor))}
-        keyboardType="numeric"
-      />
-      <Button
-        title="Gerar"
-        onPress={handleGenerateNewRandomNumbers}
-        style={styles.buttonStyle}
-      />
-      <FlatList
-        data={numbers}
-        keyExtractor={item => item.toString()}
-        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-      />
-    </View>
+    <>
+      <View style={styles.app}>
+        <View style={styles.container}>
+          <Button buttonText="/" onPress={handleOnPress} />
+          <Button buttonText="1" onPress={handleOnPress} />
+          <Button buttonText="2" onPress={handleOnPress} />
+          <Button buttonText="3" onPress={handleOnPress} />
+        </View>
+        <View style={styles.container}>
+          <Button buttonText="+" onPress={handleOnPress} />
+          <Button buttonText="4" onPress={handleOnPress} />
+          <Button buttonText="5" onPress={handleOnPress} />
+          <Button buttonText="6" onPress={handleOnPress} />
+        </View>
+        <View style={styles.container}>
+          <Button buttonText="*" onPress={handleOnPress} />
+          <Button buttonText="7" onPress={handleOnPress} />
+          <Button buttonText="8" onPress={handleOnPress} />
+          <Button buttonText="9" onPress={handleOnPress} />
+        </View>
+      </View>
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  app: {
+    backgroundColor: '#191919',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+});
