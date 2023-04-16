@@ -1,49 +1,79 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Button} from '../components/Button';
+import React, {useState} from 'react';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
 export function Home() {
-  function handleOnPress() {
-    console.warn('Im alive!');
+  const [number, setNumber] = useState(0);
+
+  function handleIncrementInTwo() {
+    setNumber(prevCount => prevCount + 2);
+  }
+
+  function handleDecrementInTwo() {
+    if (number >= 0) {
+      setNumber(prevCount => prevCount - 2);
+    }
+  }
+
+  function handleIncrementInTwentyFive() {
+    setNumber(prevCount => prevCount + 25);
+  }
+
+  function handleDecrementInTwentyFive() {
+    if (number >= 0) {
+      setNumber(prevCount => prevCount - 25);
+    }
   }
 
   return (
-    <>
-      <View style={styles.app}>
-        <View style={styles.container}>
-          <Button buttonText="/" onPress={handleOnPress} />
-          <Button buttonText="1" onPress={handleOnPress} />
-          <Button buttonText="2" onPress={handleOnPress} />
-          <Button buttonText="3" onPress={handleOnPress} />
-        </View>
-        <View style={styles.container}>
-          <Button buttonText="+" onPress={handleOnPress} />
-          <Button buttonText="4" onPress={handleOnPress} />
-          <Button buttonText="5" onPress={handleOnPress} />
-          <Button buttonText="6" onPress={handleOnPress} />
-        </View>
-        <View style={styles.container}>
-          <Button buttonText="*" onPress={handleOnPress} />
-          <Button buttonText="7" onPress={handleOnPress} />
-          <Button buttonText="8" onPress={handleOnPress} />
-          <Button buttonText="9" onPress={handleOnPress} />
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.number}>Número: {number}</Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="+2"
+          style={styles.buttons}
+          onPress={handleIncrementInTwo}
+        />
+        <Button
+          title="-2"
+          style={styles.buttons}
+          onPress={handleDecrementInTwo}
+        />
       </View>
-    </>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="+25"
+          onPress={handleIncrementInTwentyFive}
+          style={styles.buttons}
+        />
+        <Button
+          title="-25"
+          style={styles.buttons}
+          onPress={handleDecrementInTwentyFive}
+        />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  app: {
-    backgroundColor: '#191919',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
-    // flex: 1,
+    backgroundColor: '#1d1d1d',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  number: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
+    width: '50%',
+    marginTop: 20,
+  },
+  buttons: {
+    backgroundColor: '#A370F7',
   },
 });
